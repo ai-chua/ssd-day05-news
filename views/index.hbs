@@ -2,7 +2,7 @@
   <div class="col-4">
     <!-- FORM HERE -->
 
-    <form action="/search" method="" class="bg-white p-4 rounded">
+    <form action="/search" method="" class="bg-white p-4 rounded mb-4">
       <p class="text-center" hidden>Form</p>
       <!-- KEYWORD -->
       <div class="form-group">
@@ -54,18 +54,22 @@
       <button type="submit" class="btn btn-primary w-100">Search</button>
     </form>
 
+    <div class="bg-white py-3 px-4 rounded my-4 text-center">
+      Made by <a href="https://github.com/niliaaa/ssd-day05-news">🌱 ai</a>
+    </div>
+
   </div>
   <div class="col-8">
-    {{#if searchParams }}
-    <div class="search-params">
-      <p class="lighten text-center"> Search something!</p>
+    {{#if articleArr }}
+    <div class="search-params article w-100 py-2 px-4 mb-4 rounded">
+      <span class="mr-2"> Search: </span>
+      <span class="btn btn-sm btn-primary mr-2">{{searchKeyword}}</span>
+      <span class="btn btn-sm btn-primary mr-2">{{searchRegion}}</span>
+      <span class="btn btn-sm btn-primary mr-2">{{searchCategory}}</span>
     </div>
     {{else}}
-    <div class="search-params d-flex align-items-center mb-4">
-      <span class="mr-2"> Search: </span>
-      <span class="btn btn-sm btn-light mr-2">{{searchKeyword}}</span>
-      <span class="btn btn-sm btn-light mr-2">{{searchRegion}}</span>
-      <span class="btn btn-sm btn-light mr-2">{{searchCategory}}</span>
+    <div class="search-params article w-100 p-4 mb-4 rounded d-flex flex-column">
+      <p class="lighten text-center"> Search something!</p>
     </div>
     {{/if}}
 
@@ -78,7 +82,7 @@
           <img src="{{this.urlToImage}}" alt="Article Image" class="headline-img mr-4">
           <p>{{this.description}}</p>
         </div>
-        <p class="text-right">{{this.publishedAt}}</p>
+        <span class="text-right lighten">{{this.publishedAt}}</span>
       </div>
     </a>
     {{/each}}
