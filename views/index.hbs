@@ -1,1 +1,86 @@
-test
+<div class="row">
+  <div class="col-4">
+    <!-- FORM HERE -->
+
+    <form action="/search" method="" class="bg-white p-4 rounded">
+      <p class="text-center" hidden>Form</p>
+      <!-- KEYWORD -->
+      <div class="form-group">
+        <label for="keyword">Keyword</label>
+        <input type="text" name="keyword" class="form-control" id="keyword" placeholder="Keyword">
+      </div>
+      <!-- REGION -->
+      <label for="country">Region</label>
+      <div class="d-flex justify-content-between flex-wrap">
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="country" id="us" value="us">
+          <label class="form-check-label flag" for="us">🇺🇸</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="country" id="uk" value="uk">
+          <label class="form-check-label flag" for="uk">🇬🇧</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="country" id="fr" value="fr">
+          <label class="form-check-label flag" for="fr">🇫🇷</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="country" id="sg" value="sg">
+          <label class="form-check-label flag" for="sg">🇸🇬</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="country" id="jp" value="jp">
+          <label class="form-check-label flag" for="jp">🇯🇵</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="country" id="cn" value="cn">
+          <label class="form-check-label flag" for="cn">🇨🇳</label>
+        </div>
+      </div>
+      <!-- CATEGORY -->
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control" name="category" id="category">
+          <option selected value> </option>
+          <option>Business</option>
+          <option>General</option>
+          <option>Entertainment</option>
+          <option>health</option>
+          <option>Science</option>
+          <option>Sports</option>
+          <option>Technology</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Search</button>
+    </form>
+
+  </div>
+  <div class="col-8">
+    {{#if searchParams }}
+    <div class="search-params">
+      <p class="lighten text-center"> Search something!</p>
+    </div>
+    {{else}}
+    <div class="search-params d-flex align-items-center mb-4">
+      <span class="mr-2"> Search: </span>
+      <span class="btn btn-sm btn-light mr-2">{{searchKeyword}}</span>
+      <span class="btn btn-sm btn-light mr-2">{{searchRegion}}</span>
+      <span class="btn btn-sm btn-light mr-2">{{searchCategory}}</span>
+    </div>
+    {{/if}}
+
+    <!-- ARTICLE LISTINGS -->
+    {{#each articleArr}}
+    <a href="{{this.url}}" target="new">
+      <div class="article w-100 p-4 my-4 rounded d-flex flex-column">
+        <p class="text-primary text-justify"><b>{{this.title}}</b></p>
+        <div class="d-flex justify-content-start mb-4">
+          <img src="{{this.urlToImage}}" alt="Article Image" class="headline-img mr-4">
+          <p>{{this.description}}</p>
+        </div>
+        <p class="text-right">{{this.publishedAt}}</p>
+      </div>
+    </a>
+    {{/each}}
+  </div>
+</div>

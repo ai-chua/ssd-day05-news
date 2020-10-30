@@ -1,6 +1,7 @@
 /*CSS CONFIGS*/
-@import "config/font";
-
+@import "configs/font.css";
+@import "configs/color.css";
 
 /*CSS COMPONENTS*/
-@import "components/grid";
+@import "components/grid.css";
+@import "components/form.css";

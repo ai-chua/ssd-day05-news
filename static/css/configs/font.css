@@ -1,0 +1,16 @@
+a, a:hover {
+  color: #343A40;
+  text-decoration: none;
+}
+
+.lighten {
+  color: #808080;
+  opacity: 0.9;
+}
+
+.search-params {
+}
+
+#header-text a {
+  color: white !important;
+}
