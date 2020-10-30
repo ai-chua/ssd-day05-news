@@ -52,24 +52,17 @@ app.get('/search', async (req, res) => {
   } else {
     console.log('--- NO RESULTS ---')
     console.log(' ')
-    const searchParams = {
-      searchKeyword: req.query.keyword,
-      searchRegion: req.query.country,
-      searchCategory: req.query.category
-    }
-    res.render('index', { searchParams })
+    res.render('index')
   }
 })
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   console.log('--- HOME NO REQ ---')
   console.log(' ')
   res.status(200)
   res.type('text/html')
   res.render('index')
 })
-
-
 
 // Start express
 app.listen(PORT, () => { // first parameter = port number
