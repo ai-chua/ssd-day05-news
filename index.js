@@ -49,7 +49,10 @@ app.get('/search', async (req, res) => {
   console.log('search url: ', url)
   const results = await fetch(url, { headers })
   const headlines = await results.json()
-  console.log(headlines.totalResults)
+  // console.log(headlines.totalResults)
+  for(let i = 0; i < headlines.articles.length; i+=1) {
+    console.log(new Date(parseInt(headlines.articles.publishedAt)))
+  }
   if (headlines.totalResults > 0) {
     res.render('index', {
       articleArr: headlines.articles,
@@ -65,12 +68,24 @@ app.get('/search', async (req, res) => {
   }
 })
 
-app.get('/', (req, res) => {
-  console.log('--- HOME NO REQ ---')
-  console.log(' ')
-  res.status(200)
+app.get('/', async (req, res) => {
+  const url = withQuery(
+    process.env.ENDPOINT,
+    {
+      // q: req.query.keyword,
+      country: 'sg',
+      category: 'general'
+    })
+  const results = await fetch(url, { headers })
+  const headlines = await results.json()
+  res.status(201)
   res.type('text/html')
-  res.render('index')
+  res.render('index', {
+    articleArr: headlines.articles
+    // searchKeyword: req.query.keyword,
+    // searchRegion: req.query.country,
+    // searchCategory: req.query.category
+  })
 })
 
 // Start express
