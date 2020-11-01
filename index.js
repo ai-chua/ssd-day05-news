@@ -24,6 +24,15 @@ app.set('views', __dirname + '/views')
 // Configure the static files
 app.use(express.static(__dirname + '/static'))
 
+const headers = {'X-Api-Key': process.env.API_KEY }
+
+// var cache = {"":{
+//   keyword: "asd",
+//   country: "sg",
+//   category: "abc",
+//   result : {}
+// }
+
 // Prefix match
 app.get('/search', async (req, res) => {
   console.log('--- New Req ---')
@@ -33,22 +42,22 @@ app.get('/search', async (req, res) => {
   const url = withQuery(
     process.env.ENDPOINT,
     {
-      apiKey: process.env.API_KEY,
       q: req.query.keyword,
       country: req.query.country,
       category: req.query.category
     })
   console.log('search url: ', url)
-  const results = await fetch(url)
+  const results = await fetch(url, { headers })
   const headlines = await results.json()
+  console.log(headlines.totalResults)
   if (headlines.totalResults > 0) {
-    console.log(headlines.articles)
     res.render('index', {
       articleArr: headlines.articles,
       searchKeyword: req.query.keyword,
       searchRegion: req.query.country,
       searchCategory: req.query.category
     })
+    res.status(201)
   } else {
     console.log('--- NO RESULTS ---')
     console.log(' ')
@@ -56,7 +65,7 @@ app.get('/search', async (req, res) => {
   }
 })
 
-app.get('/', async (req, res) => {
+app.get('/', (req, res) => {
   console.log('--- HOME NO REQ ---')
   console.log(' ')
   res.status(200)
